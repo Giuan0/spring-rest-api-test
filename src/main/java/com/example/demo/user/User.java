@@ -70,11 +70,19 @@ public class User{
     private Set<UserPurchase> userPurchases = new HashSet<>();
 
     public User(){}
+    
     public User(Long id, String name, String email){
         this.id    = id;
         this.name  = name;
         this.email = email;
     }
+
+    public User(User user){
+        this.id = user.getId();
+        this.name  = user.getName();
+        this.email = user.getEmail();
+    }
+
     public Long getId() {
         return this.id;
     }

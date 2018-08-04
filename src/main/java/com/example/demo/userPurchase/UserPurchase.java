@@ -30,23 +30,32 @@ public class UserPurchase{
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id")
-    @JsonProperty(access=Access.WRITE_ONLY)
+    // @JsonProperty(access=Access.WRITE_ONLY)
     private User user;
 
     @NotNull
     private float total;
     private boolean payed = false;
 
-    @Column(name="is_owner")
-    private boolean isOwner;
 
-    public UserPurchase(User user, Purchase purchase, int nUsers, boolean isOwner){
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="owner_id")
+    private User owner;
+
+    public UserPurchase(User user, Purchase purchase, int nUsers, User owner){
         this.user = user;
         this.purchase = purchase;
         this.total = purchase.getTotal()/nUsers;
-        this.isOwner = isOwner;
-        if(isOwner)
-            this.payed = true;
+        this.owner   = owner;
+    }
+
+    public UserPurchase(UserPurchase userPurchase){
+        this.id = userPurchase.getId();
+        this.purchase = userPurchase.getPurchase();
+        this.total = userPurchase.getTotal();
+        this.payed = userPurchase.getPayed();
+        this.user  = new User(userPurchase.getUser());
+        this.owner = new User(userPurchase.getOwner());
     }
 
     public UserPurchase(){}
@@ -79,17 +88,17 @@ public class UserPurchase{
         this.total = total;
     }
 
-    public boolean getIsOwner() {
-        return this.isOwner;
-    }
-    public void setIsOwner(boolean isOwner) {
-        this.isOwner = isOwner;
-    }
-
     public boolean getPayed() {
         return this.payed;
     }
     public void setPayed(boolean payed) {
         this.payed = payed;
+    }
+
+    public User getOwner() {
+        return this.owner;
+    }
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

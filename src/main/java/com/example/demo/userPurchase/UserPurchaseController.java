@@ -2,6 +2,7 @@ package com.example.demo.userPurchase;
 import java.util.ArrayList;
 import java.util.List;
 // import java.util.Optional;
+import java.util.Optional;
 
 // import com.example.demo.purchase.Purchase;
 // import com.example.demo.room.Room;
@@ -35,7 +36,7 @@ public class UserPurchaseController{
     //     return this.userPurchaseRepository.findAll();
     // }
 
-    @GetMapping("/users/purchases/{userId}")
+    @GetMapping("/users/purchases/{userId}")//refactor, filter informations(user and owner)
     public DefaultResponse<List<UserPurchase>> getAllPurchaseByUserId(
         @PathVariable("userId") Long userId
     ){  
@@ -50,12 +51,13 @@ public class UserPurchaseController{
         return new DefaultResponse<>(null, "Purchase finished", 200);
     }
 
-    @PostMapping("/users/purchases/{userId}")//needs to improov
+    @PostMapping("/users/purchases/{userId}")//needs to refactor
     public DefaultResponse postPurchase(
         @PathVariable("userId") Long userId,
         @RequestBody PostPurchaseRequest request
         ){
             
+            Optional<User> owner = this.userRepository.findById(userId);
             List<User> users = this.userRepository.findAllById(request.getUsersId());
             List<UserPurchase> usersPurchase = new ArrayList<UserPurchase>();
             
@@ -70,7 +72,7 @@ public class UserPurchaseController{
                     user, 
                     request.getPurchase(), 
                     request.getUsersId().size(),
-                    user.getId() == userId
+                    owner.get()
                 );
 
                 usersPurchase.add(userPurchase);

@@ -33,7 +33,7 @@ public interface UserPurchaseRepository extends JpaRepository<UserPurchase, Long
     //     value="select new com.example.models.response.UserPurchases(user.name) from UserPurchase up join User as user on (up.user = user.id)")
     List<UserPurchases> findAllUserPurchases();
 
-    @Query("select up from UserPurchase up where up.user.id = ?1")
+    @Query("SELECT new com.example.demo.userPurchase.UserPurchase(up) FROM UserPurchase up WHERE (up.user.id = ?1 OR up.owner.id = ?1) AND up.user.id <> up.owner.id")
     List<UserPurchase> findByUserId(Long userId);
 
     @Transactional

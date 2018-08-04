@@ -26,6 +26,12 @@ public class UserController{
         return new DefaultResponse<List<User>>(userRepository.findAll(), "list users", 200);
     }
 
+    @GetMapping("/users/{userId}")
+    public DefaultResponse<User> getUserById(@PathVariable("userId") Long userId){
+        User user = this.userRepository.findById(userId).get();
+        return new DefaultResponse<User>(user, "get user", 200);
+    }
+
     // @GetMapping("/users/{usersId}/rooms")
     // public List<Room> getUserRooms(@PathVariable(value="userId") Long userId){
 
