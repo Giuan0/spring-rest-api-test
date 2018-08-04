@@ -17,9 +17,9 @@ public class PurchaseController{
     PurchaseRepository purchaseRepository;
 
     @GetMapping("/purchases/{roomId}")
-    public DefaultResponse<Purchase> getPurchases(@PathVariable("roomId") Long roomId){
+    public DefaultResponse<List<Purchase>> getPurchases(@PathVariable("roomId") Long roomId){
         List<Purchase> purchases = this.purchaseRepository.findAllByRoomId(roomId);
-        return new DefaultResponse<Purchase>(purchases, "all purchases from room "+roomId, 200);
+        return new DefaultResponse<List<Purchase>>(purchases, "all purchases from room "+roomId, 200);
     }
 
     // @PostMapping("/purchase")

@@ -5,9 +5,9 @@ import java.util.List;
 public class DefaultResponse<T>{
     private String message;
     private int code;
-    private List<T> data;
+    private T data;
 
-    public DefaultResponse(List<T> data, String message, int code){
+    public DefaultResponse(T data, String message, int code){
         this.data = data;
         this.message = message;
         this.code = code;
@@ -15,10 +15,10 @@ public class DefaultResponse<T>{
 
     public DefaultResponse(){}
 
-    public List<T> getData() {
+    public T getData() {
         return this.data;
     }
-    public void setData(List<T> data) {
+    public void setData(T data) {
         this.data = data;
     }
 

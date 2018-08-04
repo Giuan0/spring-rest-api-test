@@ -36,11 +36,11 @@ public class UserPurchaseController{
     // }
 
     @GetMapping("/users/purchases/{userId}")
-    public DefaultResponse<UserPurchase> getAllPurchaseByUserId(
+    public DefaultResponse<List<UserPurchase>> getAllPurchaseByUserId(
         @PathVariable("userId") Long userId
     ){  
         List<UserPurchase> usersPurchase = this.userPurchaseRepository.findByUserId(userId);
-        return new DefaultResponse<UserPurchase>(usersPurchase, "users purchase", 200);
+        return new DefaultResponse<List<UserPurchase>>(usersPurchase, "users purchase", 200);
     }
 
     @PutMapping("/users/purchases/finish/{userId}")//mark as payed

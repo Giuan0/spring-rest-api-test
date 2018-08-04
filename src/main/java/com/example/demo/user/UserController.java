@@ -22,8 +22,8 @@ public class UserController{
     RoomRepository roomRepository;
 
     @GetMapping("/users")
-    public DefaultResponse<User> getUsers(){
-        return new DefaultResponse<User>(userRepository.findAll(), "list users", 200);
+    public DefaultResponse<List<User>> getUsers(){
+        return new DefaultResponse<List<User>>(userRepository.findAll(), "list users", 200);
     }
 
     // @GetMapping("/users/{usersId}/rooms")

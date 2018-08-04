@@ -26,9 +26,9 @@ public class RoomController{
     UserRepository userRepository;
 
     @GetMapping("/rooms")
-    public DefaultResponse<Room> getRooms(){
+    public DefaultResponse<List<Room>> getRooms(){
         List<Room> rooms = this.roomRepository.findAll();
-        return new DefaultResponse<Room>(rooms, "all rooms", 200);
+        return new DefaultResponse<List<Room>>(rooms, "all rooms", 200);
     }
 
     @PutMapping("/rooms/{roomId}/join/{email}")//improov
@@ -62,8 +62,6 @@ public class RoomController{
     public DefaultResponse<Optional<Room>> getRoom(@PathVariable(value="roomId") Long roomId){
         Optional<Room> room = this.roomRepository.findById(roomId);
 
-        List<Optional<Room>> list = new ArrayList();
-        list.add(room);
-        return new DefaultResponse<Optional<Room>>(list, "", 200);
+        return new DefaultResponse<Optional<Room>>(room, "room id "+roomId, 200);
     }
 }
