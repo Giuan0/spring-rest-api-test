@@ -5,7 +5,7 @@
 
 ```diff
 + JWT Authentication
-+ Refactore some routes
++ Refactor some routes
 + Learn some good pratices and patterns
 + Learn how to filter some properties on entities
 + Write tests

@@ -67,6 +67,7 @@ public class UserPurchaseController{
                 return roomRepository.save(room);
             });
             
+            
             users.forEach(user->{
                 UserPurchase userPurchase = new UserPurchase(
                     user, 
@@ -77,7 +78,6 @@ public class UserPurchaseController{
 
                 usersPurchase.add(userPurchase);
             });
-
             
             this.userPurchaseRepository.saveAll(usersPurchase);
 

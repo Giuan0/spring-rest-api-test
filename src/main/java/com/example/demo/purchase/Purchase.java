@@ -31,7 +31,7 @@ public class Purchase{
     private Long id;
 
     @NotNull
-    private String name;
+    private String description;
     
     private String local;
 
@@ -53,9 +53,9 @@ public class Purchase{
     private float total;
     private boolean payed = false;
 
-    public Purchase(Long id, String name, String local, float total, Date date){
+    public Purchase(Long id, String description, String local, float total, Date date){
         this.id = id;
-        this.name  = name;
+        this.description  = description;
         this.local = local;
         this.total = total;
         this.date  = date;
@@ -69,11 +69,11 @@ public class Purchase{
         this.id = id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getDescription() {
+        return this.description;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLocal() {
