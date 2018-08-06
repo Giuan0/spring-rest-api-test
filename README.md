@@ -12,6 +12,7 @@
 + Fix date info on entities
 + Validate requests
 + Change status request dynamically
++ Documentation (Spring REST Docs)
 ```
 
 * TODO FEATURES
