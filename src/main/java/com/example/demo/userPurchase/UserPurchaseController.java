@@ -11,6 +11,7 @@ import com.example.demo.room.RoomRepository;
 import com.example.demo.user.User;
 import com.example.demo.user.UserRepository;
 import com.example.models.request.PostPurchaseRequest;
+import com.example.models.response.Bills;
 // import com.example.models.response.UserPurchases;
 import com.example.models.response.DefaultResponse;
 
@@ -35,6 +36,15 @@ public class UserPurchaseController{
     // public List<UserPurchase> purchase(){
     //     return this.userPurchaseRepository.findAll();
     // }
+    
+    @GetMapping("/billing/room/{roomId}/user/{userId}")//billing history in perspective to the user specified
+    public DefaultResponse<List<Bills>> test(
+        @PathVariable("userId") Long userId,
+        @PathVariable("roomId") Long roomId
+    ){
+        List<Bills> bills = this.userPurchaseRepository.bills(userId, roomId);
+        return new DefaultResponse<List<Bills>>(bills, "billing history", 200);
+    }
 
     @GetMapping("/users/purchases/{userId}")//refactor, filter informations(user and owner)
     public DefaultResponse<List<UserPurchase>> getAllPurchaseByUserId(

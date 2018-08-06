@@ -5,7 +5,7 @@ import javax.transaction.Transactional;
 
 import com.example.demo.user.User;
 import com.example.models.response.UserPurchases;
-
+import com.example.models.response.Bills;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,9 +21,27 @@ public interface UserPurchaseRepository extends JpaRepository<UserPurchase, Long
     // +"from UserPurchase up "
     // +"join User as user on (up.user = user.id)"
     // +" join Purchase as purchase on (up.purchase = purchase.id )")
-    
+
+    @Query(
+        value=""+
+        "SELECT new com.example.models.response.Bills("+
+            "up.purchase.id, "+
+            "purchase.total, "+
+            "SUM(CASE WHEN up.owner = up.user THEN 0 ELSE up.total END), "+
+            "COUNT(up.purchase), "+
+            "up.owner.id = ?1, "+
+            "owner.name, "+
+            "owner.id, "+
+            "SUM(CASE WHEN up.user.id = ?1 AND up.user <> up.owner THEN up.total ELSE 0 END) ) "+
+        "FROM UserPurchase up "+
+        "JOIN Purchase as purchase ON (up.purchase = purchase.id) "+
+        "JOIN User as owner ON (owner.id = up.owner) "+
+        "WHERE purchase.room.id = ?2 "+
+        "GROUP BY up.purchase, owner.id ")
+    List<Bills> bills(Long userId, Long roomId);
+
     @Query("select "
-    +"new com.example.models.response.UserPurchases" 
+    +"new com.example.models.response.UserPurchases"
     +"(user, purchase)"
     // +"new com.example.demo.purchase(purchase.id, purchase.name, purchase.local, "
     +"from UserPurchase up "
