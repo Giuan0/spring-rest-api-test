@@ -18,4 +18,5 @@
 * TODO FEATURES
 ```diff
 + Chat
++ Comments on Purchase
 ```
