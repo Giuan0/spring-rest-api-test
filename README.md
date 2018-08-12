@@ -15,6 +15,12 @@
 + Documentation (Spring REST Docs)
 ```
 
+* TODO ENDPOINTS
+
+```diff
++ Get users by room (name and ID)
+```
+
 * TODO FEATURES
 ```diff
 + Chat
