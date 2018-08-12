@@ -27,6 +27,7 @@ public interface UserPurchaseRepository extends JpaRepository<UserPurchase, Long
         "SELECT new com.example.models.response.Bills("+
             "up.purchase.id, "+
             "purchase.total, "+
+            "purchase.description, "+
             "SUM(CASE WHEN up.owner = up.user THEN 0 ELSE up.total END), "+
             "COUNT(up.purchase), "+
             "up.owner.id = ?1, "+

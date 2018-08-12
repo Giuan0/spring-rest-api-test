@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Bills{
 	@JsonProperty("purchase_id")
-    private Long purchaseId;
+	private Long purchaseId;
+	private String description;
     private float paid;
 	private double lent;
 	@JsonProperty("n_participants")
@@ -18,10 +19,11 @@ public class Bills{
 	private double owes;
 	
 	public Bills(){}
-	public Bills(Long purchaseId, float paid, Long lent, Long nParticipants, boolean isOwner, String ownerName, Long ownerId, double owes) {
+	public Bills(Long purchaseId, float paid, String description, Long lent, Long nParticipants, boolean isOwner, String ownerName, Long ownerId, double owes) {
 			super();
 			this.purchaseId = purchaseId;
 			this.paid = paid;
+			this.description = description;
 			this.lent = lent;
 			this.nParticipants = nParticipants;
 			this.isOwner = isOwner;
@@ -30,6 +32,12 @@ public class Bills{
 			this.owes = owes;
 	}
 
+	public String getDescription() {
+		return this.description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	/**
 	* Returns value of purchaseId
 	* @return
