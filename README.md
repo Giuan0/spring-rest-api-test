@@ -19,6 +19,7 @@
 
 ```diff
 + Get users by room (name and ID)
++ Get rooms by userId
 ```
 
 * TODO FEATURES
