@@ -3,6 +3,7 @@ package com.example.demo.room;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import com.example.demo.user.User;
 import com.example.demo.user.UserRepository;
@@ -63,5 +64,12 @@ public class RoomController{
         Optional<Room> room = this.roomRepository.findById(roomId);
 
         return new DefaultResponse<Optional<Room>>(room, "room id "+roomId, 200);
+    }
+
+    @GetMapping("/rooms/users/{roomId}")//gambiarra, fix it latter
+    public DefaultResponse<List<String>> getUsersRoom(@PathVariable(value="roomId") Long roomId){
+        Optional<Room> room = this.roomRepository.findById(roomId);
+
+        return new DefaultResponse<List<String>>(room.get().getUsersNames(), "room id "+roomId, 200);
     }
 }

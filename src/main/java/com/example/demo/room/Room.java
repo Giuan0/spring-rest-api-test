@@ -1,5 +1,6 @@
 package com.example.demo.room;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -84,6 +85,16 @@ public class Room{
     public Set<User> getUsers() {
         return this.users;
     }
+
+    public List<String> getUsersNames(){//refactor, look for better implementation
+        List<String> usersNames = new ArrayList<String>();
+        this.users.forEach(u->{
+            usersNames.add(u.getName());
+        });
+
+        return usersNames;
+    }
+
     public Set<Purchase> getPurchases() {
         return this.purchases;
     }
