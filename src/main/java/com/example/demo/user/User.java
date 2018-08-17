@@ -1,5 +1,6 @@
 package com.example.demo.user;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -51,13 +52,16 @@ public class User{
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="created_at")
-    private Date createdAt = new Date();
+    private Date createdAt;
 
     @ManyToMany(fetch = FetchType.LAZY,
     cascade = {
         CascadeType.PERSIST,
         CascadeType.MERGE
     })
+
+    
+    @JsonProperty(access=Access.WRITE_ONLY)
     @JoinTable(
         name="room_users",
         joinColumns={@JoinColumn(name="user_id")},
@@ -69,7 +73,9 @@ public class User{
     @OneToMany(mappedBy="user")
     private Set<UserPurchase> userPurchases = new HashSet<>();
 
-    public User(){}
+    public User(){
+        this.createdAt = new Date();
+    }
     
     public User(Long id, String name, String email){
         this.id    = id;
@@ -81,6 +87,15 @@ public class User{
         this.id = user.getId();
         this.name  = user.getName();
         this.email = user.getEmail();
+    }
+
+    @JsonProperty("rooms")
+    public List<String> getRoomNames(){
+        List<String> roomNames = new ArrayList<>();
+        this.rooms.forEach(r -> {
+            roomNames.add(r.getName());
+        });
+        return roomNames;
     }
 
     public Long getId() {

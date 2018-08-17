@@ -86,13 +86,13 @@ public class Room{
         return this.users;
     }
 
-    public List<String> getUsersNames(){//refactor, look for better implementation
-        List<String> usersNames = new ArrayList<String>();
+    public List<User> getUsersNames(){//refactor, look for better implementation
+        List<User> users = new ArrayList<User>();
         this.users.forEach(u->{
-            usersNames.add(u.getName());
+            users.add(new User(u));
         });
 
-        return usersNames;
+        return users;
     }
 
     public Set<Purchase> getPurchases() {

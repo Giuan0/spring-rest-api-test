@@ -67,9 +67,9 @@ public class RoomController{
     }
 
     @GetMapping("/rooms/users/{roomId}")//gambiarra, fix it latter
-    public DefaultResponse<List<String>> getUsersRoom(@PathVariable(value="roomId") Long roomId){
+    public DefaultResponse<List<User>> getUsersRoom(@PathVariable(value="roomId") Long roomId){
         Optional<Room> room = this.roomRepository.findById(roomId);
 
-        return new DefaultResponse<List<String>>(room.get().getUsersNames(), "room id "+roomId, 200);
+        return new DefaultResponse<List<User>>(room.get().getUsersNames(), "room id "+roomId, 200);
     }
 }
