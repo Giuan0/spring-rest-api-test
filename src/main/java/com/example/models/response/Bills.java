@@ -90,6 +90,7 @@ public class Bills{
 	* Returns value of nParticipants
 	* @return
 	*/
+	
 	public Long getNParticipants() {
 		return nParticipants;
 	}

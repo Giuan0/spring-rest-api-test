@@ -61,7 +61,7 @@ public class User{
     })
 
     
-    @JsonProperty(access=Access.WRITE_ONLY)
+    @JsonIgnore
     @JoinTable(
         name="room_users",
         joinColumns={@JoinColumn(name="user_id")},
