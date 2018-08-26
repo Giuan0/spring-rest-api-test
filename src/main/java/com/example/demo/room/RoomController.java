@@ -32,16 +32,20 @@ public class RoomController{
         return new DefaultResponse<List<Room>>(rooms, "all rooms", 200);
     }
 
-    @PutMapping("/rooms/{roomId}/join/{email}")//improov
-    public DefaultResponse joinRoom(@PathVariable("email") String email, @PathVariable("roomId") Long roomId){
+    @PostMapping("/rooms/{roomId}/join")//improov
+    public DefaultResponse joinRoom(
+        @RequestBody() User userE, 
+        @PathVariable("roomId") Long roomId){
 
-        User user = this.userRepository.findByEmailAddress(email);
+        
+        User user = this.userRepository.findByEmailAddress(userE.getEmail());
         this.roomRepository.findById(roomId).map(room->{
             user.getRooms().add(room);
             room.getUsers().add(user);
             return this.userRepository.save(user);
         });
-        return new DefaultResponse<>(null, email+" has joined the room", 200);
+        System.out.println(roomId);
+        return new DefaultResponse<>(null, user.getEmail()+" has joined the room", 200);
     }
 
     @PostMapping("/rooms/{userId}")

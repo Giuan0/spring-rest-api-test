@@ -2,7 +2,7 @@ package com.example.models.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Bills{
+public class Bill{
 	@JsonProperty("purchase_id")
 	private Long purchaseId;
 	private String description;
@@ -18,8 +18,8 @@ public class Bills{
     private Long ownerId;
 	private double owes;
 	
-	public Bills(){}
-	public Bills(Long purchaseId, float paid, String description, Long lent, Long nParticipants, boolean isOwner, String ownerName, Long ownerId, double owes) {
+	public Bill(){}
+	public Bill(Long purchaseId, float paid, String description, Long lent, Long nParticipants, boolean isOwner, String ownerName, Long ownerId, double owes) {
 			super();
 			this.purchaseId = purchaseId;
 			this.paid = paid;

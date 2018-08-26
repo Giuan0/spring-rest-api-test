@@ -1,10 +1,14 @@
 package com.example.demo.user;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -90,12 +94,18 @@ public class User{
     }
 
     @JsonProperty("rooms")
-    public List<String> getRoomNames(){
-        List<String> roomNames = new ArrayList<>();
-        this.rooms.forEach(r -> {
-            roomNames.add(r.getName());
-        });
-        return roomNames;
+    public List<Map<String,Object>> getRoomNames(){ //is it a good pratice??
+        
+        return this.rooms
+        .stream()
+        .sorted(Comparator.comparing(Room::getName))
+        .map(r -> {
+            Map<String, Object> item = new HashMap<String, Object>();
+            item.put("id", r.getId());
+            item.put("name", r.getName());
+            return item;
+        })
+        .collect(Collectors.toList());
     }
 
     public Long getId() {

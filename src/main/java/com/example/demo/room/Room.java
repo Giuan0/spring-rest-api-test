@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -50,6 +51,7 @@ public class Room{
     @Column(name="created_at")
     private Date createdAt = new Date();
     
+    @JsonProperty(access=Access.WRITE_ONLY)
     @ManyToMany(fetch = FetchType.LAZY,
     cascade = {
         CascadeType.PERSIST,
@@ -82,6 +84,15 @@ public class Room{
     }
     public void setCreatedAt(Date attribute) {
         this.createdAt = createdAt;
+    }
+
+    @JsonProperty("user_names")
+    public List<String> getUserNames(){
+        return this.users
+        .stream()
+        .map(User::getName)
+        .sorted()
+        .collect(Collectors.toList());
     }
 
     public Set<User> getUsers() {

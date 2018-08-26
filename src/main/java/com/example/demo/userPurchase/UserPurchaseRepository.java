@@ -5,7 +5,7 @@ import javax.transaction.Transactional;
 
 import com.example.demo.user.User;
 import com.example.models.response.UserPurchases;
-import com.example.models.response.Bills;
+import com.example.models.response.Bill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -24,7 +24,7 @@ public interface UserPurchaseRepository extends JpaRepository<UserPurchase, Long
 
     @Query(
         value=""+
-        "SELECT new com.example.models.response.Bills("+
+        "SELECT new com.example.models.response.Bill("+
             "up.purchase.id, "+
             "purchase.total, "+
             "purchase.description, "+
@@ -39,7 +39,7 @@ public interface UserPurchaseRepository extends JpaRepository<UserPurchase, Long
         "JOIN User as owner ON (owner.id = up.owner) "+
         "WHERE purchase.room.id = ?2 "+
         "GROUP BY up.purchase, owner.id ")
-    List<Bills> bills(Long userId, Long roomId);
+    List<Bill> bills(Long userId, Long roomId);
 
     @Query("select "
     +"new com.example.models.response.UserPurchases"

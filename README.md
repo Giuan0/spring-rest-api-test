@@ -27,3 +27,8 @@
 + Chat
 + Comments on Purchase
 ```
+
+# Run
+```
+mvn spring-boot:run
+```
