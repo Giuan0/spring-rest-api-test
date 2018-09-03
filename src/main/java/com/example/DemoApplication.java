@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example;
 
 import com.example.demo.room.RoomController;
 import com.example.demo.user.UserController;

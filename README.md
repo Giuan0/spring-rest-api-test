@@ -4,7 +4,7 @@
 * TODO
 
 ```diff
-+ JWT Authentication
++ JWT Authentication (Spring security) ---> DONE
 + Refactor some routes
 + Learn some good pratices and patterns
 + Learn how to filter some properties on entities
